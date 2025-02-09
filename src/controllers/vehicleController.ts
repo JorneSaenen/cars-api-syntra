@@ -19,7 +19,7 @@ export const getAllVehicles = async (req: Request, res: Response) => {
     }
 
     const vehiclesWithLicense = vehicles.map((vehicle) => {
-      if (vehicle.type === "bike" && vehicle.cc) {
+      if (vehicle.type === "motorcycle" && vehicle.cc) {
         return getLicense(vehicle);
       }
       return vehicle;
@@ -52,7 +52,7 @@ export const getVehicle = async (req: Request, res: Response) => {
 
     let vehicleWithLicense;
 
-    if (vehicle.type === "bike" && vehicle.cc) {
+    if (vehicle.type === "motorcycle" && vehicle.cc) {
       vehicleWithLicense = getLicense(vehicle);
     } else {
       vehicleWithLicense = vehicle;
