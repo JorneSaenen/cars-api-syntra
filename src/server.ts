@@ -6,10 +6,10 @@ import connectToDb from "./config/database";
 import vehicleRoutes from "./routes/vehicleRoutes";
 import userRoutes from "./routes/userRoutes";
 import { notFound } from "./controllers/notFoundController";
+import { NODE_ENV, PORT } from "./config/env";
 
 // Variables
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
@@ -22,6 +22,6 @@ app.all("*", notFound);
 
 // Server Listening
 app.listen(PORT, async () => {
-  console.log(`Server listening on port ${PORT}! 🚀`);
+  console.log(`Server listening on port ${PORT}! 🚀 (${NODE_ENV})`);
   await connectToDb();
 });
