@@ -27,7 +27,7 @@ app.set("views", "src/views");
 app.use(express.static("src/public"));
 app.use(cookieParser());
 app.use(express.json());
-//app.use(arcjetMiddleware);
+app.use(arcjetMiddleware);
 
 // Routes
 app.get("/", async (req, res) => {
