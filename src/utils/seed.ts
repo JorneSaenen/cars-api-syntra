@@ -3,20 +3,17 @@ import { Vehicle } from "../models/vehicleModel";
 import { data } from "./data";
 import { MONGO_URI } from "../config/env";
 
-const seedDatabase = async () => {
+const seedVehicles = async () => {
   try {
-    mongoose.connect(MONGO_URI! as string);
-    // Clear existing data
+    await mongoose.connect(MONGO_URI! as string);
     await Vehicle.deleteMany();
-
-    // Insert sample users
     await Vehicle.insertMany(data);
-    console.log("Database seeded successfully! 🌱");
-    mongoose.connection.close();
+    console.log("Seeding vehicles completed successfully! 🌱");
   } catch (error) {
     console.error("Seeding error:", error);
-    mongoose.connection.close();
+  } finally {
+    await mongoose.connection.close();
   }
 };
 
-await seedDatabase();
+await seedVehicles();
