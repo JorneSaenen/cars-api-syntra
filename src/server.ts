@@ -8,6 +8,7 @@ import vehicleRoutes from "./routes/vehicleRoutes";
 import userRoutes from "./routes/userRoutes";
 import authRoutes from "./routes/authRoutes";
 import { notFound } from "./controllers/notFoundController";
+import arcjetMiddleware from "./middleware/arcjetMiddleware";
 
 // Variables
 const app = express();
@@ -23,6 +24,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
+app.use(arcjetMiddleware);
 
 // Routes
 app.use("/api/auth", authRoutes);
