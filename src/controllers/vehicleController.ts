@@ -8,7 +8,8 @@ export const getAllVehicles = async (req: Request, res: Response) => {
     const count = await Vehicle.find().countDocuments();
     const vehicles = await Vehicle.find()
       .limit(10)
-      .skip(page ? 10 * (+page - 1) : 0);
+      .skip(page ? 10 * (+page - 1) : 0)
+      .sort({ createdAt: -1 });
 
     const pages = Math.ceil(count / 10);
 
