@@ -1,6 +1,8 @@
 import arcjet, { detectBot, shield, tokenBucket } from "@arcjet/node";
 import { ARCJET_KEY } from "./env";
 
+//Use "DRY_RUN" to log only
+
 const aj = arcjet({
   key: ARCJET_KEY!,
   characteristics: ["ip.src"],
