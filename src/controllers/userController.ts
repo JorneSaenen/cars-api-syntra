@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { User } from "../models/userModel";
+import { log } from "console";
 
 export const getUsers = async (req: Request, res: Response) => {
   try {
@@ -16,9 +17,14 @@ export const getUsers = async (req: Request, res: Response) => {
 
 export const getUser = async (req: Request, res: Response) => {
   try {
-    // TODO: check in middleware if user is logged in and it is this user.
-
     const { id } = req.params;
+    console.log(req.user, id);
+
+    if (id !== req.user?._id) {
+      res.status(401).json({ message: "Unauthorized" });
+      return;
+    }
+
     const user = await User.findById(id)
       .select("-password")
       .populate("favorites");
