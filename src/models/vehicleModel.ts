@@ -24,7 +24,7 @@ const vehicleSchema = new mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ["car", "bike"],
+      enum: ["car", "motorcycle"],
       required: true,
       trim: true,
     },
@@ -32,7 +32,7 @@ const vehicleSchema = new mongoose.Schema(
       type: Number,
       required: [
         function (this: { type: string }) {
-          return this.type === "bike";
+          return this.type === "motorcycle";
         },
         "cc is required when type is moto",
       ],
@@ -41,7 +41,7 @@ const vehicleSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 export const Vehicle = mongoose.model("Vehicle", vehicleSchema);
