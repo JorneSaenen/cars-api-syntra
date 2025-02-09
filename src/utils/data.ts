@@ -1,4 +1,4 @@
-export const data = [
+export const vechicleData = [
   {
     brand: "Harley-Davidson",
     model: "Iron 883",
