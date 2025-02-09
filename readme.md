@@ -1,10 +1,5 @@
 ## Todos:
 
-### Vehicle
-
-- Add license
-- Pagination
-
 ### User
 
 - Add favorites

@@ -1,7 +1,8 @@
 import arcjet, { detectBot, shield, tokenBucket } from "@arcjet/node";
+import { ARCJET_KEY } from "./env";
 
 const aj = arcjet({
-  key: process.env.ARCJET_KEY!,
+  key: ARCJET_KEY!,
   characteristics: ["ip.src"],
   rules: [
     // Shield protects your app from common attacks e.g. SQL injection

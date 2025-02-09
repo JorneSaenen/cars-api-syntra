@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import { Request, Response } from "express";
 import { User } from "../models/userModel";
 import jwt from "jsonwebtoken";
+import { JWT_SECRET } from "../config/env";
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -21,7 +22,7 @@ export const register = async (req: Request, res: Response) => {
 
     const token = jwt.sign(
       { _id: newUser._id, email: newUser.email },
-      process.env.JWT_SECRET as string,
+      JWT_SECRET as string,
       { expiresIn: "1d" }
     );
 
@@ -79,7 +80,7 @@ export const login = async (req: Request, res: Response) => {
 
     const token = jwt.sign(
       { _id: user._id, email: user.email },
-      process.env.JWT_SECRET as string,
+      JWT_SECRET as string,
       { expiresIn: "1d" }
     );
 

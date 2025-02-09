@@ -1,5 +1,4 @@
 // Imports
-import "dotenv/config";
 import cors from "cors";
 import express from "express";
 import connectToDb from "./config/database";
@@ -9,10 +8,10 @@ import userRoutes from "./routes/userRoutes";
 import authRoutes from "./routes/authRoutes";
 import { notFound } from "./controllers/notFoundController";
 import arcjetMiddleware from "./middleware/arcjetMiddleware";
+import { NODE_ENV, PORT } from "./config/env";
 
 // Variables
 const app = express();
-const PORT = process.env.PORT || 3000;
 const corsOptions = {
   origin: "*",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -34,6 +33,6 @@ app.all("*", notFound);
 
 // Server Listening
 app.listen(PORT, async () => {
-  console.log(`Server listening on port ${PORT}! 🚀`);
+  console.log(`Server listening on port ${PORT}! 🚀 (${NODE_ENV})`);
   await connectToDb();
 });

@@ -1,6 +1,7 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { NextFunction, Request, Response } from "express";
 import { UserType } from "../types/request";
+import { JWT_SECRET } from "../config/env";
 
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -10,11 +11,11 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
       return;
     }
 
-    if (!process.env.JWT_SECRET) {
+    if (!JWT_SECRET) {
       throw new Error("Internal error");
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
+    const decoded = jwt.verify(token, JWT_SECRET as string);
 
     const userObject: UserType = {
       _id: (decoded as JwtPayload)._id,

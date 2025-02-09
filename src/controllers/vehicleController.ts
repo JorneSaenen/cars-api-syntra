@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Vehicle } from "../models/vehicleModel";
+import { getLicense } from "../utils/helpers";
 
 export const getAllVehicles = async (req: Request, res: Response) => {
   try {
@@ -16,9 +17,16 @@ export const getAllVehicles = async (req: Request, res: Response) => {
       return;
     }
 
+    const vehiclesWithLicense = vehicles.map((vehicle) => {
+      if (vehicle.type === "bike" && vehicle.cc) {
+        return getLicense(vehicle);
+      }
+      return vehicle;
+    });
+
     res.status(200).json({
       status: "success",
-      data: vehicles,
+      data: vehiclesWithLicense,
       pages: pages,
       page: page ? +page : 1,
     });
@@ -35,7 +43,21 @@ export const getVehicle = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const vehicle = await Vehicle.findById(id);
-    res.status(200).json({ status: "success", data: vehicle });
+
+    if (!vehicle) {
+      res.status(404).json({ message: "Vehicle not found" });
+      return;
+    }
+
+    let vehicleWithLicense;
+
+    if (vehicle.type === "bike" && vehicle.cc) {
+      vehicleWithLicense = getLicense(vehicle);
+    } else {
+      vehicleWithLicense = vehicle;
+    }
+
+    res.status(200).json({ status: "success", data: vehicleWithLicense });
   } catch (error: unknown) {
     if (error instanceof Error) {
       res.status(500).json({ message: error.message });
