@@ -7,12 +7,11 @@
   "scripts": {
     "dev": "npx tsx watch ./src/server.ts",
     "build": "pkgroll --clean-dist --minify",
-    "start": "node dist/server.mjs"
+    "start": "node dist/server.mjs",
+    "seed": "tsx ./src/utils/seed.ts"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Jorne Saenen",
   "license": "MIT",
-  "description": "",
   "dependencies": {
     "@arcjet/node": "^1.0.0-beta.2",
     "@types/bcrypt": "^5.0.2",
