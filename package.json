@@ -1,5 +1,5 @@
 {
-  "name": "cars",
+  "name": "vehicle-sale",
   "version": "1.0.0",
   "main": "server.js",
   "exports": "./dist/server.mjs",
