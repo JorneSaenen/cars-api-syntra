@@ -24,6 +24,7 @@
 - Render.com
 - Set same-site cookies
 - Set secure cookies
+- Setup correct env variables and mongo database
 
 ### Work
 

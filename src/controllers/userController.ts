@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { User } from "../models/userModel";
+import { getLicense } from "../utils/helpers";
 
 export const getUsers = async (req: Request, res: Response) => {
   try {
@@ -32,7 +33,14 @@ export const getUser = async (req: Request, res: Response) => {
       return;
     }
 
-    res.status(200).json({ status: "success", data: user });
+    const userFavoritesAndLicenses = user.favorites?.map((vehicle: any) => {
+      if (vehicle.type === "motorcycle" && vehicle.cc) {
+        return getLicense(vehicle);
+      }
+      return vehicle;
+    });
+
+    res.status(200).json({ status: "success", data: userFavoritesAndLicenses });
   } catch (error: unknown) {
     if (error instanceof Error) {
       res.status(500).json({ message: error.message });
