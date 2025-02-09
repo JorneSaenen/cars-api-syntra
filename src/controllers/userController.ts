@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { User } from "../models/userModel";
-import bcrypt from "bcrypt";
+
 export const getUsers = async (req: Request, res: Response) => {
   try {
     const users = await User.find().select("-password").populate("favorites");
