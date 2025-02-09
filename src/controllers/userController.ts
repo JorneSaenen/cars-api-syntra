@@ -18,7 +18,6 @@ export const getUsers = async (req: Request, res: Response) => {
 export const getUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    console.log(req.user, id);
 
     if (id !== req.user?._id) {
       res.status(401).json({ message: "Unauthorized" });

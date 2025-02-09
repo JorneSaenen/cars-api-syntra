@@ -24,6 +24,11 @@ const userSchema = new mongoose.Schema(
       default:
         "https://greekherald.com.au/wp-content/uploads/2020/07/default-avatar.png",
     },
+    emailVerified: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
     favorites: {
       type: [mongoose.Types.ObjectId],
       ref: "Vehicle",
@@ -33,7 +38,7 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 export const User = mongoose.model("User", userSchema);
