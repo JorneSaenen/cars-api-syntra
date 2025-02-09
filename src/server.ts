@@ -9,6 +9,7 @@ import authRoutes from "./routes/authRoutes";
 import { notFound } from "./controllers/notFoundController";
 import arcjetMiddleware from "./middleware/arcjetMiddleware";
 import { NODE_ENV, PORT } from "./config/env";
+import { Vehicle } from "./models/vehicleModel";
 
 // Variables
 const app = express();
@@ -21,11 +22,18 @@ const corsOptions = {
 
 // Middleware
 app.use(cors(corsOptions));
+app.set("view engine", "ejs");
+app.set("views", "src/views");
+app.use(express.static("src/public"));
 app.use(cookieParser());
 app.use(express.json());
-app.use(arcjetMiddleware);
+//app.use(arcjetMiddleware);
 
 // Routes
+app.get("/", async (req, res) => {
+  const vehicles = await Vehicle.find();
+  res.render("index", { vehicles });
+});
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/vehicles", vehicleRoutes);

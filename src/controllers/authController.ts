@@ -1,3 +1,4 @@
+import validator from "validator";
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
 import { User } from "../models/userModel";
@@ -10,6 +11,19 @@ export const register = async (req: Request, res: Response) => {
 
     if (user) {
       res.status(422).json({ message: "User already exists" });
+      return;
+    }
+
+    const isStrongPassword = validator.isStrongPassword(req.body.password, {
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
+    });
+
+    if (!isStrongPassword) {
+      res.status(422).json({ message: "Password is not strong enough" });
       return;
     }
 

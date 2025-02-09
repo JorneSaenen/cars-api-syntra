@@ -1,10 +1,5 @@
 ## Todos:
 
-### User
-
-- Add favorites
-- Remove favorites
-
 ### Security
 
 - Strong Passwords
@@ -12,12 +7,9 @@
 
 ### Template Engine
 
-- EJS
 - Login
 - Register
 - Logout
-- Overview
-- Delete Option
 
 ### Deploy
 
@@ -31,6 +23,6 @@
 - api met nodige open GET endpoints ✅
 - Typescript ✅
 - Gebruikersmodel: Avatar, naam, e-mail, wachtwoord (minimum) ✅
-- api met secure GET/POST/DELETE
+- api met secure GET/POST/DELETE ✅
 - Static folder (Template engine - ejs of handlebars) met login + overzicht producten + delete
   (geen add/update)

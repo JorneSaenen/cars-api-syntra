@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vehicle Management</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script src="/js/main.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Vehicle Management</h1>
+      <table id="vehicleTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Type</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% vehicles.forEach((vehicle)=>{ %>
+          <tr>
+            <td><%- vehicle._id %></td>
+            <td><%- vehicle.brand %></td>
+            <td><%- vehicle.model %></td>
+            <td><%- vehicle.year %></td>
+            <td><%- vehicle.type %></td>
+            <td>
+              <button id="deleteBtn" data-id="<%- vehicle._id %>">
+                Delete
+              </button>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
