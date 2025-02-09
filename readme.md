@@ -7,9 +7,8 @@
 
 ### Security
 
-- Passwords diffulty
+- Strong Passwords
 - Email verification
-- Rate limit -> Arcjet
 
 ### Template Engine
 
