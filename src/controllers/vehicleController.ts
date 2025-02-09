@@ -3,9 +3,25 @@ import { Vehicle } from "../models/vehicleModel";
 
 export const getAllVehicles = async (req: Request, res: Response) => {
   try {
-    const vehicles = await Vehicle.find();
+    const { page } = req.query;
+    const count = await Vehicle.find().countDocuments();
+    const vehicles = await Vehicle.find()
+      .limit(10)
+      .skip(page ? 10 * (+page - 1) : 0);
 
-    res.status(200).json({ status: "success", data: vehicles });
+    const pages = Math.ceil(count / 10);
+
+    if (page && +page > pages) {
+      res.status(404).json({ message: "Page not found" });
+      return;
+    }
+
+    res.status(200).json({
+      status: "success",
+      data: vehicles,
+      pages: pages,
+      page: page ? +page : 1,
+    });
   } catch (error: unknown) {
     if (error instanceof Error) {
       res.status(500).json({ message: error.message });
@@ -48,7 +64,7 @@ export const updateVehicle = async (req: Request, res: Response) => {
     const updated = await Vehicle.findByIdAndUpdate(
       id,
       { ...req.body },
-      { new: true },
+      { new: true }
     );
 
     res.status(200).json({ status: "success", data: updated });
