@@ -7,9 +7,8 @@ import validator from "validator";
 
 export const register = async (req: Request, res: Response) => {
   try {
-    // Name, email en password van body
     const { name, email, password } = req.body;
-    // Bestaat deze gebruiker al?
+
     const user = await User.findOne({ email });
     if (user) {
       res.status(403).json({ message: "User already exists" });
