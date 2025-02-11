@@ -25,3 +25,7 @@ export const getUser = async (req: Request, res: Response) => {
     }
   }
 };
+
+// Add favorite
+
+// Remove favorite
