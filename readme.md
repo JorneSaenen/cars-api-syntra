@@ -15,6 +15,9 @@
 ### Template Engine
 
 - [ ] EJS
+- [ ] Partials
+- [ ] Layouts
+- [ ] local auth middleware - check if user is logged in - res.locals.user = user; req.headers.origin
 - [ ] Login
 - [ ] Register
 - [ ] Logout
