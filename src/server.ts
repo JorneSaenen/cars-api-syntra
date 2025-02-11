@@ -10,6 +10,7 @@ import { notFound } from "./controllers/notFoundController";
 import arcjetMiddleware from "./middleware/arcjetMiddleware";
 import { NODE_ENV, PORT } from "./config/env";
 import { Vehicle } from "./models/vehicleModel";
+import localAuthMiddleware from "./middleware/localAuthMiddleware";
 
 // Variables
 const app = express();
@@ -27,12 +28,16 @@ app.set("views", "src/views");
 app.use(express.static("src/public"));
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(arcjetMiddleware);
 
 // Routes
-app.get("/", async (req, res) => {
+app.get("/", localAuthMiddleware, async (req, res) => {
   const vehicles = await Vehicle.find();
   res.render("index", { vehicles });
+});
+app.get("/login", (req, res) => {
+  res.render("login");
 });
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);

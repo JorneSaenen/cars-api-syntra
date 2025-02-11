@@ -10,6 +10,13 @@
   <body>
     <div class="container">
       <h1>Vehicle Management</h1>
+      <h2><%= locals.user.name %></h2>
+      <img
+        src="<%= locals.user.avatar %>"
+        alt=""
+        width="200"
+        style="border-radius: 20px"
+      />
       <table id="vehicleTable">
         <thead>
           <tr>
@@ -30,7 +37,7 @@
             <td><%- vehicle.year %></td>
             <td><%- vehicle.type %></td>
             <td>
-              <button id="deleteBtn" data-id="<%- vehicle._id %>">
+              <button class="red" id="deleteBtn" data-id="<%- vehicle._id %>">
                 Delete
               </button>
             </td>

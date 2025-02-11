@@ -110,6 +110,11 @@ export const login = async (req: Request, res: Response) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
 
+    if (req.headers.origin === "http://localhost:3000") {
+      res.redirect("/");
+      return;
+    }
+
     res.status(200).json({
       status: "success",
       data: {
@@ -135,6 +140,11 @@ export const logout = async (req: Request, res: Response) => {
       httpOnly: true,
       expires: new Date(0),
     });
+
+    if (req.headers.origin === "http://localhost:3000") {
+      res.redirect("/login");
+      return;
+    }
 
     res.status(200).json({ status: "success", message: "Logged out" });
   } catch (error: unknown) {
