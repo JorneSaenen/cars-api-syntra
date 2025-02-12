@@ -28,4 +28,15 @@ export const getUser = async (req: Request, res: Response) => {
 
 // Add favorite
 
+export const addToFavorites = async (req: Request, res: Response) => {
+  try {
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res.status(500).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: "Something went wrong" });
+    }
+  }
+};
+
 // Remove favorite
