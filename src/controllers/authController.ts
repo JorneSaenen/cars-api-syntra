@@ -58,6 +58,10 @@ export const register = async (req: Request, res: Response) => {
       email: newUser.email,
       avatar: newUser.avatar,
     };
+    if (req.headers.origin === "http://localhost:3000") {
+      res.redirect("/");
+      return;
+    }
     res.status(201).json({ status: "success", data: userObj });
   } catch (error: unknown) {
     if (error instanceof Error) {

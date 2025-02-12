@@ -1,0 +1,34 @@
+<%- include('partials/header'); -%>
+
+<div class="container">
+  <h1><%= title %></h1>
+
+  <table id="vehicleTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Type</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% vehicles.forEach((vehicle)=>{ %>
+      <tr>
+        <td><%- vehicle._id %></td>
+        <td><%- vehicle.brand %></td>
+        <td><%- vehicle.model %></td>
+        <td><%- vehicle.year %></td>
+        <td><%- vehicle.type %></td>
+        <td>
+          <button class="red" id="deleteBtn" data-id="<%- vehicle._id %>">
+            Delete
+          </button>
+        </td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>

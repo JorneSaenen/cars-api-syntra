@@ -3,8 +3,8 @@
 ### User
 
 - [x] GetUser with all favorites And only the logged in user can see their favorites
-- [ ] Add favorites - only the logged in user can add their favorites
-- [ ] Remove favorites - only the logged in user can remove their favorites
+- [x] Add favorites - only the logged in user can add their favorites
+- [x] Remove favorites - only the logged in user can remove their favorites
 
 ### Security
 

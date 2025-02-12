@@ -30,6 +30,29 @@ export const getUser = async (req: Request, res: Response) => {
 
 export const addToFavorites = async (req: Request, res: Response) => {
   try {
+    const { id } = req.params;
+    const { vehicleId } = req.body;
+    const user = req.user;
+    if (!user) {
+      res.status(403).json({ message: "Unauthorized" });
+      return;
+    }
+    if (id !== user._id) {
+      res.status(403).json({ message: "Unauthorized" });
+      return;
+    }
+    // $push kijkt niet naar duplicaten, addToSet wel
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      {
+        $addToSet: { favorites: vehicleId },
+      },
+      { new: true }
+    )
+      .select("-password")
+      .populate("favorites");
+    res.status(200).json({ status: "success", data: updatedUser });
+    //const {vehicleId} = req.query = ?vehicleId=fhsdfjdgfs
   } catch (error: unknown) {
     if (error instanceof Error) {
       res.status(500).json({ message: error.message });
@@ -40,3 +63,35 @@ export const addToFavorites = async (req: Request, res: Response) => {
 };
 
 // Remove favorite
+
+export const removeFromFavorites = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { vehicleId } = req.body;
+    const user = req.user;
+    if (!user) {
+      res.status(403).json({ message: "Unauthorized" });
+      return;
+    }
+    if (id !== user._id) {
+      res.status(403).json({ message: "Unauthorized" });
+      return;
+    }
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      {
+        $pull: { favorites: vehicleId },
+      },
+      { new: true }
+    )
+      .select("-password")
+      .populate("favorites");
+    res.status(200).json({ status: "success", data: updatedUser });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res.status(500).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: "Something went wrong" });
+    }
+  }
+};
