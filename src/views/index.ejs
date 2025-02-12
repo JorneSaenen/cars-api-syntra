@@ -2,7 +2,14 @@
 
 <div class="container">
   <h1><%= title %></h1>
-
+  <h2>Welcome <%= locals.user.name %></h2>
+  <img
+    src="<%= locals.user.avatar %>"
+    alt=""
+    width="100"
+    style="border-radius: 50%"
+  />
+  <button class="green" id="logout">Logout</button>
   <table id="vehicleTable">
     <thead>
       <tr>

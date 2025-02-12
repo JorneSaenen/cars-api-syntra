@@ -10,6 +10,7 @@ import { notFound } from "./controllers/notFoundController";
 import { NODE_ENV, PORT } from "./config/env";
 import cookieParser from "cookie-parser";
 import { Vehicle } from "./models/vehicleModel";
+import localAuthMiddleware from "./middleware/localAuthMiddleware";
 
 // Variables
 const app = express();
@@ -23,7 +24,7 @@ app.set("view engine", "ejs");
 app.set("views", "src/views");
 app.use(express.static("src/public"));
 
-app.get("/", async (req, res) => {
+app.get("/", localAuthMiddleware, async (req, res) => {
   const vehicles = await Vehicle.find();
   res.render("index", {
     title: "Vehicle Manager",
@@ -33,6 +34,10 @@ app.get("/", async (req, res) => {
 
 app.get("/register", async (req, res) => {
   res.render("register");
+});
+
+app.get("/login", async (req, res) => {
+  res.render("login");
 });
 
 // Routes

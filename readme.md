@@ -14,15 +14,15 @@
 
 ### Template Engine
 
-- [ ] EJS
-- [ ] Partials
-- [ ] Layouts
-- [ ] local auth middleware - check if user is logged in - res.locals.user = user; req.headers.origin
-- [ ] Login
-- [ ] Register
-- [ ] Logout
-- [ ] Overview
-- [ ] Delete Option
+- [x] EJS
+- [x] Partials
+- [x] Layouts
+- [x] local auth middleware - check if user is logged in - res.locals.user = user; req.headers.origin
+- [x] Login
+- [x] Register
+- [x] Logout
+- [x] Overview
+- [x] Delete Option
 
 ### Deploy
 
